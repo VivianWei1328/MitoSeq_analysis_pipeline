@@ -870,7 +870,7 @@ time for f in $(cat nano.input.file); do echo $f; cd ${f%.fastq.gz}; pwd; gzip *
 date
 
 echo "Part 2 finished, starting part 3:"
-cd $PATH_to_basecalled_files
+cd $PATH_to_script_files
 pwd
 
 time sh $Run_name-13V-run1.101.dup.part3.60K.sh
