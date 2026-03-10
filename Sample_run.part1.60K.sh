@@ -2,7 +2,7 @@
 #!/bin/bash
 #!/usr/bin/perl
 
-### before running, replace $PATHs to actual value
+### before running, replace $PATH_to_basecalled_files and $Run_name to actual value
 ### Need conda environments for longread_umi_Intel and samtools_env_Intel
 ###### This pipeline use samtools 1.2 in samtools_env_Intel
 ###### samtools 1.21 in regular and samtools_env
@@ -68,6 +68,25 @@ time for f in $file; do echo $f; longread_umi nanopore_pipeline -d $PATH_to_base
 
 
 cd $PATH_to_basecalled_files/$Run_name-13V-run1/duplex_101 
+pwd
+echo "Generate the nano.input.file"
+
+cat <<EOF >> nano.input.file
+MT-28-13V-run1.101.dup.V01.cut1.21.m150.fastq.gz
+MT-28-13V-run1.101.dup.V02.cut1.21.m150.fastq.gz
+MT-28-13V-run1.101.dup.V03.cut1.21.m150.fastq.gz
+MT-28-13V-run1.101.dup.V04.cut1.21.m150.fastq.gz
+MT-28-13V-run1.101.dup.V05.cut1.21.m150.fastq.gz
+MT-28-13V-run1.101.dup.V13.cut1.21.m150.fastq.gz
+MT-28-13V-run1.101.dup.V07.cut1.21.m150.fastq.gz
+MT-28-13V-run1.101.dup.V08.cut1.21.m150.fastq.gz
+MT-28-13V-run1.101.dup.V09.cut1.21.m150.fastq.gz
+MT-28-13V-run1.101.dup.V10.cut1.21.m150.fastq.gz
+MT-28-13V-run1.101.dup.V11.cut1.21.m150.fastq.gz
+MT-28-13V-run1.101.dup.V12.cut1.21.m150.fastq.gz
+MT-28-13V-run1.101.dup.F01.cut1.21.m150.fastq.gz
+EOF
+
 
 for f in $file; do wc -l  ./${f%.fastq}.LRUMI_out/umi_binning/umi_ref/umi12f.fa; done
 
@@ -94,7 +113,7 @@ conda deactivate
 
 
 echo "end of part 1, start part 2"
-cd $PATH_to_fastq_files
+cd $PATH_to_script_files
 
 time sh $Run_name-13V-run1.101.dup.part2.60K.sh
 
