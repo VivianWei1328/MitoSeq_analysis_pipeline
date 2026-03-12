@@ -127,6 +127,55 @@ part3
 
 sequentially.
 
+6. Output
+
+The pipeline runs in three steps.
+
+Part 1
+
+Demultiplexing using cutadapt
+
+UMI sequence recovery using longread_umi
+
+Part 2
+
+UMI clustering
+
+Variant detection
+
+Part 3
+
+Consensus sequence generation and alignment to the mitochondrial reference (chrM)
+
+Output Directories
+
+Each demultiplexed sample is stored in a separate folder named:
+
+$Run_name.101.dup.V01.cut1.21.m150
+$Run_name.101.dup.V02.cut1.21.m150
+$Run_name.101.dup.V03.cut1.21.m150
+Coverage-Based Results
+
+Each sample folder contains results generated with different read coverage thresholds:
+
+Result	Description
+≥4 reads	Consensus from clusters with ≥4 reads
+≥5 reads (Ave-1)	Consensus from clusters with ≥5 reads
+≥6 reads (Ave-2)	Consensus from clusters with ≥6 reads
+Average coverage (Ave-cal)	Consensus based on calculated average coverage
+
+Results using Average coverage (Ave-cal) were used in the manuscript.
+
+Key Output Files
+
+Aligned consensus sequences:
+
+$Run_name.101.dup.V02.cut1.21.m150.60K.Ave-cal.con.chrM.sort.bam
+
+Variant detection results:
+
+cluster_94_60K_4up/Ave-cal.60.vcf.count.1.input
+
 Notes
 
 Ensure the correct Conda environment is activated before running the pipeline.
